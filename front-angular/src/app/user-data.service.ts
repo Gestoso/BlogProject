@@ -5,6 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class UserDataService {
 userdata: any;
+isinside = false;
+
   constructor() { }
 
   getuserdata() {
@@ -14,5 +16,26 @@ userdata: any;
     this.userdata = value
   }
 
+  settoken(token: any){
+    localStorage.setItem('token',token)
+  }
+
+  gettoken(){
+    return localStorage.getItem('token')
+    }
+
+    islogged(){
+      let email = "";
+      try {
+        if (this.userdata.email) {
+         this.isinside= true;
+        } else {
+          this.isinside= false;
+        }
+      } catch (error) {
+        this.isinside= false;
+      }
+
+    }
 
 }

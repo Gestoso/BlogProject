@@ -46,4 +46,8 @@ onSubmit(){
 
 }
 
+login(){
+  this.router.navigate(['/login']);
+}
+
 }

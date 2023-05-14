@@ -10,6 +10,9 @@ import { HttpClient } from '@angular/common/http';
 import { AppComponent } from '../app.component';
 import { UserDataService } from '../user-data.service';
 import { Route, Router } from '@angular/router';
+import { AuthService } from '../auth.service';
+import { AuthGuard } from '../auth.guard';
+
 
 @Component({
   selector: 'app-login',
@@ -17,11 +20,16 @@ import { Route, Router } from '@angular/router';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+  result: any;
+  usuario: any;
+  token: any;
   constructor(
     private app: AppComponent,
     private http: HttpClient,
     private userdata: UserDataService,
-    private router: Router
+    private router: Router,
+    private auth: AuthService,
+    private guard: AuthGuard
   ) {}
 
   loginForm = new FormGroup({
@@ -40,8 +48,26 @@ export class LoginComponent {
     return this.http
       .post('http://127.0.0.1:8000/api/login', userData)
       .subscribe((response) => {
-        this.userdata.setuserdata(response);
+        this.usuario = response;
+        this.auth.login(this.usuario.token, this.usuario.email);
+
+        this.auth.login(this.auth.getToken(), this.auth.getEmail());
+        this.guard.setIsLoggedIn;
         this.router.navigate(['/main']);
-      });
+        console.log(this.userdata);
+        console.log(this.userdata.gettoken());
+
+
+
+      },
+      (error) => {
+        this.result = 'Estos datos son incorrectos';
+        this.loginForm.reset();
+      }
+      );
+  }
+
+  register(){
+    this.router.navigate(['/register']);
   }
 }

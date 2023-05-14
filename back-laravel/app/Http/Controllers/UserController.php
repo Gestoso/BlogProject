@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Throwable;
 
 class UserController extends Controller
 {
@@ -19,7 +21,7 @@ class UserController extends Controller
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password'))
+            'password' => Hash::make($request->input('password'))
         ]);
 
         event(new Registered($user));
@@ -35,23 +37,36 @@ class UserController extends Controller
     public function login(Request $request)
     {
 
-        $credentials = $request->only('email', 'password');
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
 
-        if (Auth::attempt($credentials)) {
-
+        try {
             $user = User::where('email', $request->email)->first();
-            $user->save();
 
-            Auth::login($user);
-            return response()->json([
-                'name' => $user->name,
-                'email' => $user->email
-
-            ]);
-        } else {
-            return response()->json([
-                'message' => 'Invalid email or password'
-            ]);
+        } catch (Throwable $e) {
         }
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Credenciales inválidas',
+            ], 401);
+        }
+        $token = $user->createToken('remember_token')->plainTextToken;
+        $user->remember_token =  $token;
+         $user->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Inicio de sesión exitoso',
+            'token' => $token,
+            'email'=>$user->email,
+        ]);
+    }
+    public function logout(Request $request){
+
+        $user = User::where('email', $request->email)->first();
+        Auth::logout();
     }
 }
