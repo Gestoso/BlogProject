@@ -1,0 +1,24 @@
+<button class="btn btn-primary return"   (click)="return()">Volver</button>
+
+<div class="container dialog-centered profile">
+  <div class="row">
+    <div class="col-md-4">
+      <!-- Avatar del usuario -->
+      <div class="avatar-container">
+        <img src="../../../assets/profile.png" alt="Avatar del usuario" class="avatar-img">
+      </div>
+    </div>
+    <div class="col-md-8">
+      <!-- Información del usuario -->
+      <h1>{{usuario.usuario.name}}</h1>
+      <p>Correo electrónico: {{usuario.usuario.email}}</p>
+      <p>Contraseña: *********</p>
+      <mat-dialog-actions>
+        <button class="btn btn-primary"   (click)="openDialog()">Editar Perfil</button>
+      </mat-dialog-actions>
+      <button class="btn btn-danger">Eliminar Cuenta</button>
+    </div>
+  </div>
+</div>
+
+

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthGuard } from 'src/app/auth.guard';
 import { AuthService } from 'src/app/auth.service';
 import { UserDataService } from 'src/app/user-data.service';
+import { ProfileComponent } from '../profile/profile.component';
 
 @Component({
   selector: 'app-main',
@@ -11,8 +12,10 @@ import { UserDataService } from 'src/app/user-data.service';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  usuario: any
-  email: any
+  usuario: any;
+  email: any;
+  thereis = false;
+  blog: any
   constructor(
     private userData: UserDataService,
     private router: Router,
@@ -21,27 +24,22 @@ export class MainComponent implements OnInit {
     private auth: AuthService
   ){
     this.usuario = JSON.stringify(this.userData.getuserdata());
+    this.blog = this.auth.getbloginfo();
   }
   ngOnInit(): void {
     console.log(this.guard.canActivate());
     console.log(this.auth.getToken());
-    console.log(this.auth.getEmail());
+    console.log(this.auth.getUser());
+    console.log(this.auth.getBlog());
+
     this.auth.getToken();
-    this.auth.getEmail();
+    this.auth.getUser();
+    this.auth.getBlog();
+
 
 
   }
 
 
-
-  logout(){
-    console.log(this.usuario);
-
-    return this.http
-      .post('http://127.0.0.1:8000/api/logout', {email: this.auth.getEmail()})
-      .subscribe((response) => {
-        this.router.navigate(['/login']);
-      });
-  }
 
 }

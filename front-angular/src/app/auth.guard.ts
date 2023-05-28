@@ -10,7 +10,6 @@ import { UserDataService } from './user-data.service';
 export class AuthGuard implements CanActivate {
   isLoggedIn = false;
   constructor(
-    private authService: AuthService,
     private router: Router,
     private datauser: UserDataService,
     private auth: AuthService

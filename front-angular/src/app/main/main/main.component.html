@@ -1,23 +1,56 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Mi Aplicación</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Inicio</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Perfil</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Configuración</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link pointer" (click)="logout()">Cerrar sesión</a>
-      </li>
-    </ul>
+
+<div class="wrapper">
+<app-navbar></app-navbar>
+<div class="content">
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h2>Últimas publicaciones</h2>
+      <div class="card" *ngFor="let post of posts">
+        <div class="card-body">
+          <h5 class="card-title">title </h5>
+          <p class="card-text">content </p>
+          <a href="#" class="btn btn-primary">Leer más</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h2>Categorías</h2>
+      <ul class="list-group">
+        <li class="list-group-item">Tecnología</li>
+        <li class="list-group-item">Viajes</li>
+        <li class="list-group-item">Cocina</li>
+        <li class="list-group-item">Deportes</li>
+      </ul>
+    </div>
   </div>
-</nav>
+</div> -->
+<div *ngIf="!thereis" class="container">
+  <h2>Crear nuevo blog</h2>
+  <form >
+    <div class="form-group">
+      <label for="titulo">Título</label>
+      <input type="text" class="form-control" id="titulo" name="titulo">
+    </div>
+    <div class="form-group">
+      <label for="contenido">Contenido</label>
+      <textarea class="form-control" id="contenido"name="contenido"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Crear</button>
+  </form>
+</div>
+
+<div *ngIf="thereis" class="container">
+  <h2>Continuar Blog</h2>
+  <form >
+    <div class="form-group">
+      <label for="contenido">Contenido adicional</label>
+      <textarea class="form-control" id="contenido" name="contenido"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Continuar</button>
+  </form>
+</div>
+
+</div>
+<app-footer></app-footer>
+</div>

@@ -62,11 +62,34 @@ class UserController extends Controller
             'message' => 'Inicio de sesión exitoso',
             'token' => $token,
             'email'=>$user->email,
+            'name'=>$user->name,
+            'id'=>$user->id,
+            'password'=>$user->password
         ]);
     }
+
     public function logout(Request $request){
 
         $user = User::where('email', $request->email)->first();
         Auth::logout();
     }
+
+    public function editarusu(Request $request) {
+        $user = User::where('email', $request->email)->first();
+
+        $user->name = $request->filled('name') ? $request->name : $user->name;
+        $user->email = $request->filled('email') ? $request->email : $user->email;
+        $user->password = $request->filled('password') ? Hash::make($request->password) : $user->password;
+
+        $user->save();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Usuario editado',
+            'name' => $user->name,
+            'email' => $user->email,
+            'password' => $user->password,
+            'id' => $user->id
+        ]);
+    }
+
 }

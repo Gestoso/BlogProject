@@ -12,7 +12,9 @@ import { UserDataService } from '../user-data.service';
 import { Route, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { AuthGuard } from '../auth.guard';
-
+interface ApiResponse {
+  result: any;
+}
 
 @Component({
   selector: 'app-login',
@@ -22,6 +24,7 @@ import { AuthGuard } from '../auth.guard';
 export class LoginComponent {
   result: any;
   usuario: any;
+  blog: any;
   token: any;
   constructor(
     private app: AppComponent,
@@ -46,20 +49,19 @@ export class LoginComponent {
       password: password,
     };
     return this.http
-      .post('http://127.0.0.1:8000/api/login', userData)
-      .subscribe((response) => {
-        this.usuario = response;
-        this.auth.login(this.usuario.token, this.usuario.email);
+    .post('http://127.0.0.1:8000/api/login', userData)
+    .subscribe((response) => {
+      this.usuario = response;
+      this.auth.login(this.usuario, this.blog);
 
-        this.auth.login(this.auth.getToken(), this.auth.getEmail());
-        this.guard.setIsLoggedIn;
-        this.router.navigate(['/main']);
-        console.log(this.userdata);
-        console.log(this.userdata.gettoken());
+      this.auth.setUser(this.usuario)
+      this.guard.setIsLoggedIn;
+      this.router.navigate(['/main']);
 
 
 
-      },
+
+    },
       (error) => {
         this.result = 'Estos datos son incorrectos';
         this.loginForm.reset();
