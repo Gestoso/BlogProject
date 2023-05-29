@@ -26,7 +26,7 @@ export class NavbarComponent {
       console.log(this.usuario);
 
       return this.http
-        .post('http://127.0.0.1:8000/api/logout', {email: this.auth.getUser()})
+        .post('http://127.0.0.1:8000/api/logout', {email: this.auth.getemailDatauser()})
         .subscribe((response) => {
           this.router.navigate(['/login']);
         });

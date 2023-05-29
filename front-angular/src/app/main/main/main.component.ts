@@ -5,6 +5,7 @@ import { AuthGuard } from 'src/app/auth.guard';
 import { AuthService } from 'src/app/auth.service';
 import { UserDataService } from 'src/app/user-data.service';
 import { ProfileComponent } from '../profile/profile.component';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-main',
@@ -23,20 +24,41 @@ export class MainComponent implements OnInit {
     private guard: AuthGuard,
     private auth: AuthService
   ){
-    this.usuario = JSON.stringify(this.userData.getuserdata());
-    this.blog = this.auth.getbloginfo();
+
+
   }
   ngOnInit(): void {
-    console.log(this.guard.canActivate());
-    console.log(this.auth.getToken());
-    console.log(this.auth.getUser());
-    console.log(this.auth.getBlog());
+    setTimeout(() => {
+      this.usuario = this.auth.getData();
+      console.log(this.usuario.user.id);
+    }, 2000);
 
-    this.auth.getToken();
-    this.auth.getUser();
-    this.auth.getBlog();
+  }
+
+  createblog = new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    categoria: new FormControl('', [Validators.required]),
+    contenido: new FormControl('', [Validators.required]),
+  })
 
 
+  onSubmit() {
+    const name = this.createblog.controls['name'].value;
+    const categoria = this.createblog.controls['categoria'].value;
+    const contenido = this.createblog.controls['contenido'].value;
+
+    let blogdata = {
+      name: name,
+      categoria: categoria,
+      contenido: contenido,
+      user_id: this.usuario.user.id
+    }
+    console.log(blogdata);
+
+    this.http.post('http://127.0.0.1:8000/api/createblog', blogdata).subscribe(response => {
+      this.blog = response
+    console.log(this.blog);
+    });
 
   }
 

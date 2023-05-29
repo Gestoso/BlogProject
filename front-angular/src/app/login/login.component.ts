@@ -22,10 +22,11 @@ interface ApiResponse {
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+  token = this.auth.getTokenuser();
+
   result: any;
   usuario: any;
   blog: any;
-  token: any;
   constructor(
     private app: AppComponent,
     private http: HttpClient,
@@ -52,11 +53,14 @@ export class LoginComponent {
     .post('http://127.0.0.1:8000/api/login', userData)
     .subscribe((response) => {
       this.usuario = response;
-      this.auth.login(this.usuario, this.blog);
+      this.auth.setToken(this.usuario.token);
+      console.log(this.usuario);
+      console.log(this.token);
 
-      this.auth.setUser(this.usuario)
       this.guard.setIsLoggedIn;
       this.router.navigate(['/main']);
+      localStorage.setItem('data', JSON.stringify(userData));
+      localStorage.getItem("data");
 
 
 

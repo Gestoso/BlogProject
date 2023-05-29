@@ -11,22 +11,29 @@ import { ProfiledialogComponent } from '../profiledialog/profiledialog.component
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit{
+export class ProfileComponent {
   usuario: any;
   infousu: any;
+  userdata: any;
+
   constructor(
     private http: HttpClient,
     private router: Router,
     private authService: AuthService,
-    private userdata: UserDataService,
     private dialog: MatDialog
 
   ){
-    setInterval(() => {
-      this.usuario = this.authService.getUser();
+    setTimeout(() => {
+      this.infousu = this.authService.getData();
+      console.log(this.infousu.user);
+    }, 1000);
+
+
+/*     setInterval(() => {
+      this.usuario = this.authService.getData();
       console.log(this.usuario);
 
-    }, 1000)
+    }, 1000) */
 
   }
 
@@ -44,9 +51,23 @@ export class ProfileComponent implements OnInit{
   return(){
     this.router.navigate(['/main'])
   }
-  ngOnInit(): void {
-    this.usuario = this.authService.getUser();
+  inicio() {
+    let data = this.infousu.user.email
+    console.log(this.infousu.user.email);
+
+    return this.http.post('http://127.0.0.1:8000/api/datauser', data)
+      .subscribe((response) => {
+        this.usuario = response;
+
+        this.authService.setDatauser(this.usuario)
+
+        console.log(this.usuario);
+
+      },
+
+        error => {
+
+        });
 
   }
-
 }

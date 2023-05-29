@@ -27,14 +27,22 @@
 </div> -->
 <div *ngIf="!thereis" class="container">
   <h2>Crear nuevo blog</h2>
-  <form >
+  <form [formGroup]="createblog" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="titulo">Título</label>
-      <input type="text" class="form-control" id="titulo" name="titulo">
+      <input type="text" formControlName="name" class="form-control" id="titulo" name="titulo">
     </div>
     <div class="form-group">
+      <label for="categoria">Categoría</label>
+      <select class="form-control" id="categoria" formControlName="categoria">
+          <option value="">Seleccionar categoría</option>
+          <option value="IA">IA</option>
+          <option value="Programacion">Programacion</option>
+      </select>
+  </div>
+    <div class="form-group">
       <label for="contenido">Contenido</label>
-      <textarea class="form-control" id="contenido"name="contenido"></textarea>
+      <textarea class="form-control" formControlName="contenido" id="contenido"name="contenido"></textarea>
     </div>
     <button type="submit" class="btn btn-primary">Crear</button>
   </form>

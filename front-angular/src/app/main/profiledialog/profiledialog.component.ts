@@ -20,7 +20,6 @@ export class ProfiledialogComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.usuario = this.auth.getUser();
   }
 
   guardarusu = new FormGroup({
@@ -48,7 +47,6 @@ return this.http.post('http://127.0.0.1:8000/api/editarusu', data)
   .subscribe(response => {
     console.log(response);
     this.usuario = response;
-    this.auth.setUser(this.usuario);
   });
 } else {
   alert('Las contraseñas no coinciden');

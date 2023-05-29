@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\blog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -68,10 +69,37 @@ class UserController extends Controller
         ]);
     }
 
+    public function loginportoken(Request $request)
+    {
+
+
+        try {
+            $user = User::where('remember_token', $request->token)->first();
+            $blog = Blog::where('autor_id', $user->id)->first();
+        } catch (Throwable $e) {
+
+        }
+
+        return response()->json([
+            'user' => $user,
+            'blog' => $blog,
+        ], 200);
+
+    }
+
     public function logout(Request $request){
 
         $user = User::where('email', $request->email)->first();
         Auth::logout();
+    }
+
+    public function datauser(Request $request){
+        $user = User::where('email', $request->email)->first();
+        if (!$user) {
+            return response()->json(['error' => 'El usuario no existe'], 404);
+        }else{
+            return response()->json($user);
+        }
     }
 
     public function editarusu(Request $request) {
