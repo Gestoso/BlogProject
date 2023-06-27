@@ -1,33 +1,54 @@
 
 <div class="wrapper">
 <app-navbar></app-navbar>
-<div class="content">
-<!-- <div class="container">
+<div class="content my-5">
+<!-- Contenido BLOG -->
+<div class="container" *ngIf="thereis">
   <div class="row">
     <div class="col-md-8">
-      <h2>Últimas publicaciones</h2>
-      <div class="card" *ngFor="let post of posts">
-        <div class="card-body">
-          <h5 class="card-title">title </h5>
-          <p class="card-text">content </p>
-          <a href="#" class="btn btn-primary">Leer más</a>
+      <div class="col-md-12  d-flex justify-content-between">
+        <h2>Tu Blog</h2>
+        <div>
+          <button type="button" (click)="detalles()" class="btn btn">Ver Detalles</button>
         </div>
       </div>
+
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">{{blog.name}}</h2>
+          <p class="card-text">{{blog.contenido}}</p>
+        </div>
+      </div>
+      <br>
     </div>
+
     <div class="col-md-4">
       <h2>Categorías</h2>
-      <ul class="list-group">
-        <li class="list-group-item">Tecnología</li>
-        <li class="list-group-item">Viajes</li>
-        <li class="list-group-item">Cocina</li>
-        <li class="list-group-item">Deportes</li>
+      <ul class="list-group" *ngFor="let categoria of categorias">
+        <li class="list-group-item" (click)="categoriasc(categoria.name)">{{categoria.name}}</li>
       </ul>
     </div>
   </div>
-</div> -->
-<div *ngIf="!thereis" class="container">
+</div>
+<!-- CONTINUAR BLOG -->
+<br>
+<div class="container" *ngIf="thereis">
+  <h2>Continuar Blog</h2>
+  <form [formGroup]="contblog" (ngSubmit)="editsave()">
+    <div class="form-group">
+      <textarea class="form-control" formControlName="contenido" id="contenido" name="contenido" [(ngModel)]="textareavalue"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Continuar</button>
+    <button type="submit" (click)="deleteblog()" class="btn btn-danger">Eliminar</button>
+  </form>
+
+</div>
+
+
+<!-- CREAR BLOG -->
+<div *ngIf="!thereis" class="container col-md-8">
   <h2>Crear nuevo blog</h2>
-  <form [formGroup]="createblog" (ngSubmit)="onSubmit()">
+  <form [formGroup]="createblog" (ngSubmit)="create()">
     <div class="form-group">
       <label for="titulo">Título</label>
       <input type="text" formControlName="name" class="form-control" id="titulo" name="titulo">
@@ -48,16 +69,6 @@
   </form>
 </div>
 
-<div *ngIf="thereis" class="container">
-  <h2>Continuar Blog</h2>
-  <form >
-    <div class="form-group">
-      <label for="contenido">Contenido adicional</label>
-      <textarea class="form-control" id="contenido" name="contenido"></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">Continuar</button>
-  </form>
-</div>
 
 </div>
 <app-footer></app-footer>

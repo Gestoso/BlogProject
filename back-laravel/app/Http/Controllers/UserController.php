@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\User;
 use App\Models\blog;
 use Illuminate\Support\Facades\Auth;
@@ -76,6 +77,7 @@ class UserController extends Controller
         try {
             $user = User::where('remember_token', $request->token)->first();
             $blog = Blog::where('autor_id', $user->id)->first();
+            $categorias = Category::where('created_at', null)->get();
         } catch (Throwable $e) {
 
         }
@@ -83,6 +85,7 @@ class UserController extends Controller
         return response()->json([
             'user' => $user,
             'blog' => $blog,
+            'categorias' => $categorias
         ], 200);
 
     }

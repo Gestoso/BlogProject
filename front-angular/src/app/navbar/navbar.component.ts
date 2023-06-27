@@ -22,6 +22,10 @@ export class NavbarComponent {
     this.router.navigate(['/main/profile']);
   }
 
+  MiBlog(){
+    this.router.navigate(['/main']);
+  }
+
     logout(){
       console.log(this.usuario);
 

@@ -31,3 +31,7 @@ Route::post('/datauser', [UserController::class, 'datauser']);
 Route::post('/editarusu', [UserController::class, 'editarusu']);
 
 Route::post('/createblog', [BlogController::class, 'createblog']);
+Route::post('/continueblog', [BlogController::class, 'continueblog']);
+Route::post('/deleteblog', [BlogController::class, 'deleteblog']);
+Route::get('/getblogs', [BlogController::class, 'getblogs']);
+

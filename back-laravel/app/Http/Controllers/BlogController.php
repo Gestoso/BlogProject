@@ -24,9 +24,48 @@ class BlogController extends Controller
         ]);
         event(new Registered($blog));
         $blog = Blog::where('autor_id', $request->input('user_id'))->first();
-
         return response()->json([
             'blog' => $blog
         ]);
     }
+
+public function continueblog(Request $request){
+    $blog = Blog::where('blog_id', $request->blog_id)->first();
+
+
+        $contenido = $blog->contenido;
+
+        $contenido .= ' ' . $request->contenido;
+        $blog->contenido = $contenido;
+        $blog->save();
+
+
+    return response()->json([
+        'blog' => $blog
+    ]);
+}
+
+public function deleteblog(Request $request) {
+    $blog = Blog::where('blog_id', $request->blog_id)->first();
+    $blog->delete();
+
+}
+
+public function getblogs(Request $request){
+    $categoria = $request->query('categoria');
+
+    $blogs = Blog::where('categoria', $categoria)->join('users', 'blogs.autor_id', '=', 'users.id')->select('*')->get();
+    $datos = array();
+    foreach ($blogs as $blog) {
+        $datos[] = array(
+            "name" => $blog['name'],
+            "autor_name" => $blog['name'],
+            "contenido" => $blog['contenido'],
+            "created_at" => $blog['created_at'],
+            "updated_at" => $blog['updated_at'],
+        );
+    }
+
+    return response()->json($datos);
+}
 }

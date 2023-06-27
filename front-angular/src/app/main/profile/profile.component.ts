@@ -24,8 +24,8 @@ export class ProfileComponent {
 
   ){
     setTimeout(() => {
-      this.infousu = this.authService.getData();
-      console.log(this.infousu.user);
+      this.usuario = this.authService.getDatauser();
+      console.log(this.usuario);
     }, 1000);
 
 
@@ -52,16 +52,14 @@ export class ProfileComponent {
     this.router.navigate(['/main'])
   }
   inicio() {
-    let data = this.infousu.user.email
-    console.log(this.infousu.user.email);
+    let data = this.usuario.email
+    console.log(this.usuario.email);
 
     return this.http.post('http://127.0.0.1:8000/api/datauser', data)
       .subscribe((response) => {
         this.usuario = response;
 
-        this.authService.setDatauser(this.usuario)
 
-        console.log(this.usuario);
 
       },
 

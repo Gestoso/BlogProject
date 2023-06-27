@@ -10,13 +10,20 @@ export class AuthService {
   private readonly token = 'nombretoken';
   private data: any;
   datauser: any;
+  categorias: any;
 
+  setCategorias(value: any) {
+    this.categorias = value;
+  }
 
-  setData(value: any) {
+  getCategorias() {
+    return this.categorias;
+  }
+  setDataBlog(value: any) {
     this.data = value;
   }
 
-  getData() {
+  getDataBlog() {
     return this.data;
   }
 

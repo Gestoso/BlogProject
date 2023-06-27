@@ -1,0 +1,8 @@
+.carta {
+  padding: 3%;
+}
+
+.card {
+  border: 3px solid black ;
+  box-shadow: 2px 2px 4px rgb(199, 199, 199);
+}

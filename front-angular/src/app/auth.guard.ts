@@ -54,7 +54,11 @@ export class AuthGuard implements CanActivate {
   .subscribe(response => {
 
     this.jsonData=response;
-    this.auth.setData(this.jsonData);
+    console.log(this.jsonData);
+
+    this.auth.setDatauser(this.jsonData.user);
+    this.auth.setDataBlog(this.jsonData.blog);
+    this.auth.setCategorias(this.jsonData.categorias);
     this.setIsLoggedIn(true);
 
 
@@ -62,7 +66,9 @@ export class AuthGuard implements CanActivate {
 
     localStorage.setItem('data', JSON.stringify(data));
     localStorage.getItem("data");
-    console.log(this.auth.getData());
+    console.log(this.auth.getDataBlog());
+    console.log(this.auth.getDatauser());
+    console.log(this.auth.getCategorias());
 
       this.router.navigate(['/main']);
 

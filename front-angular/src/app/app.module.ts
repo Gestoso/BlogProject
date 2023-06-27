@@ -21,6 +21,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { ProfiledialogComponent } from './main/profiledialog/profiledialog.component';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { BlogdetailsComponent } from './main/blogdetails/blogdetails.component';
+import { CategoriasComponent } from './main/categorias/categorias.component';
 
 
 
@@ -34,7 +36,9 @@ import { NavbarComponent } from './navbar/navbar.component';
     ProfileComponent,
     ProfiledialogComponent,
     FooterComponent,
-    NavbarComponent
+    NavbarComponent,
+    BlogdetailsComponent,
+    CategoriasComponent
   ],
   imports: [
     BrowserModule,
