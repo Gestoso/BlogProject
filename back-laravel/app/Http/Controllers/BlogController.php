@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use App\Models\blog;
+use Carbon\Carbon;
+
 
 
 class BlogController extends Controller
@@ -12,12 +14,12 @@ class BlogController extends Controller
     public function createblog(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'title' => 'required',
             'categoria' => 'required',
             'contenido' => 'required'
         ]);
         $blog = Blog::create([
-            'name' => $request->input('name'),
+            'title' => $request->input('title'),
             'categoria' => $request->input('categoria'),
             'contenido' => $request->input('contenido'),
             'autor_id' => $request->input('user_id')
@@ -55,10 +57,12 @@ public function getblogs(Request $request){
     $categoria = $request->query('categoria');
 
     $blogs = Blog::where('categoria', $categoria)->join('users', 'blogs.autor_id', '=', 'users.id')->select('*')->get();
+
     $datos = array();
     foreach ($blogs as $blog) {
         $datos[] = array(
-            "name" => $blog['name'],
+            "title" => $blog['title'],
+            "autor_id" => $blog['autor_id'],
             "autor_name" => $blog['name'],
             "contenido" => $blog['contenido'],
             "created_at" => $blog['created_at'],

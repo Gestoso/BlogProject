@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthGuard } from 'src/app/auth.guard';
 import { AuthService } from 'src/app/auth.service';
@@ -25,44 +25,47 @@ export class MainComponent implements OnInit {
   contenido: any;
   categorias: any;
   textareavalue: string = '';
+  loading = false;
   constructor(
     private router: Router,
     private http: HttpClient,
     private auth: AuthService,
   ){
   }
-  ngOnInit(): void {
+  ngOnInit() {
     setTimeout(() => {
       this.usuario = this.auth.getDatauser();
       this.blog = this.auth.getDataBlog();
-      console.log(this.blog);
-      this.contenidotmp = this.blog.contenido;
-      this.categorias = this.auth.getCategorias();
-      console.log(this.categorias);
+      try {
 
+        this.contenidotmp = this.blog.contenido;
+      } catch (error) {
+      }
+      console.log(this.blog);
       console.log(this.usuario);
+
+
+      this.categorias = this.auth.getCategorias();
       if (this.blog != null){
         this.thereis = true;
       }
-    }, 800);
-
-  }
-
+      this.loading =true;
+    }, 1000);  }
 
   createblog = new FormGroup({
-    name: new FormControl('', [Validators.required]),
+    title: new FormControl('', [Validators.required]),
     categoria: new FormControl('', [Validators.required]),
     contenido: new FormControl('', [Validators.required]),
   })
 
 
   create() {
-    const name = this.createblog.controls['name'].value;
+    const title = this.createblog.controls['title'].value;
     const categoria = this.createblog.controls['categoria'].value;
     const contenido = this.createblog.controls['contenido'].value;
 
     let blogdata = {
-      name: name,
+      title: title,
       categoria: categoria,
       contenido: contenido,
       user_id: this.usuario.id
@@ -70,7 +73,7 @@ export class MainComponent implements OnInit {
     console.log(blogdata);
 
     this.http.post('http://127.0.0.1:8000/api/createblog', blogdata).subscribe(response => {
-      this.blog = response;
+
       this.auth.setDataBlog(response);
     console.log(this.blog);
     this.thereis = true;
@@ -131,7 +134,7 @@ this.router.navigate(['/main/details']);
     console.log(name);
 
     this.router.navigate(['/main/categorias'], {queryParams: {name}});
-    return name
+    return name;
   }
 
 }

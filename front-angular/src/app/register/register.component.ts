@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { AppComponent } from '../app.component';
 import { UserDataService } from '../user-data.service';
 import { Router } from '@angular/router';
+import { AuthGuard } from '../auth.guard';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-register',
@@ -11,11 +13,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-
+  usuario: any;
+  token: any;
   constructor (
     private http: HttpClient,
     private app: AppComponent,
-        private userData: UserDataService,
+        private auth: AuthService,
+        private guard: AuthGuard,
         private router: Router
   ){
 
@@ -40,8 +44,17 @@ onSubmit(){
     password: password
   }
   return this.http.post('http://127.0.0.1:8000/api/register', userdata).subscribe((response) => {
-    this.userData.setuserdata(response);
-    this.router.navigate(['/main']);
+    this.usuario = response;
+    console.log(response);
+
+  this.auth.setDatauser(this.usuario.user);
+  this.auth.setToken(this.usuario.token);
+  localStorage.setItem('data', JSON.stringify(userdata));
+  localStorage.getItem("data");
+
+  this.guard.setIsLoggedIn;
+this.router.navigate(['/main']);
+
   })
 
 }

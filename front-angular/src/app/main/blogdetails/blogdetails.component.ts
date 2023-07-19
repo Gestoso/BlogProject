@@ -13,7 +13,7 @@ export class BlogdetailsComponent implements OnInit {
   horac: any;
   diau: any;
   horau: any;
-
+  loading = false;
   constructor(
     private router : Router,
     private auth: AuthService
@@ -30,9 +30,8 @@ export class BlogdetailsComponent implements OnInit {
     this.horac = datec.toLocaleTimeString();
     this.diau = dateu.toLocaleDateString();
     this.horau = dateu.toLocaleTimeString();
-    }, 500);
-
-  }
+    this.loading = true;
+  }, 500);}
 
 
 

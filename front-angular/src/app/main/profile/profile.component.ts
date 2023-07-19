@@ -15,6 +15,7 @@ export class ProfileComponent {
   usuario: any;
   infousu: any;
   userdata: any;
+  loading = false;
 
   constructor(
     private http: HttpClient,
@@ -26,15 +27,8 @@ export class ProfileComponent {
     setTimeout(() => {
       this.usuario = this.authService.getDatauser();
       console.log(this.usuario);
+      this.loading = true;
     }, 1000);
-
-
-/*     setInterval(() => {
-      this.usuario = this.authService.getData();
-      console.log(this.usuario);
-
-    }, 1000) */
-
   }
 
   openDialog(){
@@ -42,10 +36,6 @@ export class ProfileComponent {
     this.dialog.open(ProfiledialogComponent, {
       width: '650px',
       height: '400px',
-      panelClass: 'dialog-centered',
-
-
-
     } )
   }
   return(){
@@ -58,14 +48,8 @@ export class ProfileComponent {
     return this.http.post('http://127.0.0.1:8000/api/datauser', data)
       .subscribe((response) => {
         this.usuario = response;
-
-
-
       },
-
         error => {
-
         });
-
   }
 }

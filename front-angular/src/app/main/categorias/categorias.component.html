@@ -1,16 +1,19 @@
+<app-loading-page *ngIf="!loading"></app-loading-page>
+<div *ngIf="loading">
+
+
 <h1>Categoría: {{categoria.name}}</h1>
-
-
 <div class="carta" *ngFor="let blog of blogs">
-  <div class="d-flex justify-content-center">
-    <h2>Tu Blog</h2>
-  </div>
-
   <div class="card">
     <div class="card-body">
-      <h2 class="card-title">h</h2>
-      <p class="card-text">h</p>
+      <h2 class="card-title d-flex justify-content-center">Título: {{blog.title}}</h2>
+
+      <p class="card-text d-flex justify-content-center">Contenido: {{blog.contenido}}</p>
+      <br>
+      <br>
+      <p class="card-title d-flex justify-content-end"><span class="perfil" [ngClass]="{'hover': hovered}" (mouseenter)="hoversi()"(click)="usuario(blog.autor_id)" (mouseleave)="hoverno()">Autor: {{blog.autor_name}}</span></p>
+      <p class="card-text d-flex justify-content-end">Última actualización: {{blog.updated_at}}</p>
     </div>
   </div>
-
+</div>
 </div>

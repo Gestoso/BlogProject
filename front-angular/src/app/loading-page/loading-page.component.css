@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15%;
+}
+
+.svg1 {
+  margin: auto;
+  background: rgb(255, 255, 255);
+  display: block;
+  shape-rendering: auto;
+}
+
+.svg2 {
+  margin: auto;
+  background: rgb(255, 255, 255);
+  display: block;
+  shape-rendering: auto;
+}

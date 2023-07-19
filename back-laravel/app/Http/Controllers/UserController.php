@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Recover;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\blog;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Throwable;
 
 class UserController extends Controller
@@ -29,9 +31,12 @@ class UserController extends Controller
         event(new Registered($user));
         Auth::login($user);
         $user = User::where('email', $request->email)->first();
+        $token = $user->createToken('remember_token')->plainTextToken;
+        $user->remember_token =  $token;
+         $user->save();
         return response()->json([
-            'name' => $user->name,
-            'email' => $user->email
+            'user' => $user,
+            'token' => $token
         ]);
 
     }
@@ -74,20 +79,36 @@ class UserController extends Controller
     {
 
 
-        try {
             $user = User::where('remember_token', $request->token)->first();
             $blog = Blog::where('autor_id', $user->id)->first();
             $categorias = Category::where('created_at', null)->get();
-        } catch (Throwable $e) {
 
-        }
-
-        return response()->json([
+        if (is_null($blog)) {
+            return response()->json([
+                'user' => $user,
+                'categorias' => $categorias
+            ], 200);
+        } else {
+            return response()->json([
             'user' => $user,
             'blog' => $blog,
             'categorias' => $categorias
         ], 200);
+        }
 
+
+    }
+
+    public function recover(Request $request) {
+        $email = $request->input('email');
+
+    $response = Mail::to($email)->send(new Recover);
+
+    if ($response === 0) {
+        return response()->json(['message' => 'El correo se envió exitosamente']);
+    } else {
+        return response()->json(['message' => 'Hubo un error al enviar el correo']);
+    }
     }
 
     public function logout(Request $request){
@@ -110,6 +131,8 @@ class UserController extends Controller
 
         $user->name = $request->filled('name') ? $request->name : $user->name;
         $user->email = $request->filled('email') ? $request->email : $user->email;
+        $user->img = $request->filled('img') ?
+        $request->img : $user->img;
         $user->password = $request->filled('password') ? Hash::make($request->password) : $user->password;
 
         $user->save();
@@ -118,9 +141,18 @@ class UserController extends Controller
             'message' => 'Usuario editado',
             'name' => $user->name,
             'email' => $user->email,
+            'img' => $user->img,
             'password' => $user->password,
             'id' => $user->id
         ]);
+    }
+
+    public function ususeleccionado(Request $request) {
+        $user_id = $request->query('user_id');
+
+        $user = User::where('id', $user_id)->first();
+
+        return $user;
     }
 
 }

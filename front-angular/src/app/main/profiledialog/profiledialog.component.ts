@@ -25,6 +25,7 @@ export class ProfiledialogComponent implements OnInit {
   guardarusu = new FormGroup({
     name: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
+    img: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
     conf_password: new FormControl('', [Validators.required])
   })
@@ -32,6 +33,7 @@ export class ProfiledialogComponent implements OnInit {
   guardar() {
 const name = this.guardarusu.controls['name'].value;
 const email = this.guardarusu.controls['email'].value;
+const img = this.guardarusu.controls['img'].value;
 const password = this.guardarusu.controls['password'].value;
 const conf_password = this.guardarusu.controls['conf_password'].value;
 if (password == conf_password || (password == null && conf_password == null))
@@ -39,6 +41,7 @@ if (password == conf_password || (password == null && conf_password == null))
   let data = {
   name: name,
   email: email,
+  img: img,
   id: this.usuario.id,
   password: password,
 }

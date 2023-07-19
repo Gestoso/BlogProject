@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { MainappRoutingModule } from './mainapp-routing.module';
 
@@ -8,7 +8,9 @@ import { MainappRoutingModule } from './mainapp-routing.module';
   declarations: [],
   imports: [
     CommonModule,
-    MainappRoutingModule
-  ]
+    MainappRoutingModule,
+    DatePipe
+  ],
+  providers:[DatePipe]
 })
 export class MainappModule { }

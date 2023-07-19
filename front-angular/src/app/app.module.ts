@@ -23,6 +23,10 @@ import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { BlogdetailsComponent } from './main/blogdetails/blogdetails.component';
 import { CategoriasComponent } from './main/categorias/categorias.component';
+import { DatePipe } from '@angular/common';
+import { UsuarioComponent } from './main/usuario/usuario.component';
+import { LoadingPageComponent } from './loading-page/loading-page.component';
+import { RecoverComponent } from './recover/recover.component';
 
 
 
@@ -38,7 +42,10 @@ import { CategoriasComponent } from './main/categorias/categorias.component';
     FooterComponent,
     NavbarComponent,
     BlogdetailsComponent,
-    CategoriasComponent
+    CategoriasComponent,
+    UsuarioComponent,
+    LoadingPageComponent,
+    RecoverComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +55,8 @@ import { CategoriasComponent } from './main/categorias/categorias.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    DatePipe
   ],
   providers: [
     UserDataService

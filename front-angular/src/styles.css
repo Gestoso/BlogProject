@@ -9,5 +9,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   justify-content: center;
 }
 
-
-
+.mat-mdc-dialog-container {
+  --mdc-dialog-container-color: #ffffff;
+}

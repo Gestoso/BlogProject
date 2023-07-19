@@ -34,4 +34,6 @@ Route::post('/createblog', [BlogController::class, 'createblog']);
 Route::post('/continueblog', [BlogController::class, 'continueblog']);
 Route::post('/deleteblog', [BlogController::class, 'deleteblog']);
 Route::get('/getblogs', [BlogController::class, 'getblogs']);
+Route::post('/recover', [UserController::class, 'recover']);
+Route::get('/ususeleccionado', [UserController::class, 'ususeleccionado']);
 

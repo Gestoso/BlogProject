@@ -61,4 +61,12 @@ export class AuthService {
     const token = this.getTokenuser();
     return new HttpHeaders().set('Authorization', `Bearer ${token}`);
   }
+
+  dropdata(){
+    this.data = null;
+    this.datauser = null;
+    this.categorias = null;
+
+    this.setToken(null);
+  }
 }

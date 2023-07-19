@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
@@ -17,6 +17,7 @@ export class AuthGuard implements CanActivate {
     private http: HttpClient,
     private auth: AuthService
     ) {}
+
 
   canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
@@ -57,7 +58,10 @@ export class AuthGuard implements CanActivate {
     console.log(this.jsonData);
 
     this.auth.setDatauser(this.jsonData.user);
-    this.auth.setDataBlog(this.jsonData.blog);
+    if (this.jsonData.blog != null) {
+          this.auth.setDataBlog(this.jsonData.blog);
+
+    }
     this.auth.setCategorias(this.jsonData.categorias);
     this.setIsLoggedIn(true);
 

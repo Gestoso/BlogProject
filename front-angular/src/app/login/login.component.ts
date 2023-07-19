@@ -12,6 +12,8 @@ import { UserDataService } from '../user-data.service';
 import { Route, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { AuthGuard } from '../auth.guard';
+import { MatDialog } from '@angular/material/dialog';
+import { RecoverComponent } from '../recover/recover.component';
 interface ApiResponse {
   result: any;
 }
@@ -28,12 +30,11 @@ export class LoginComponent {
   usuario: any;
   blog: any;
   constructor(
-    private app: AppComponent,
     private http: HttpClient,
-    private userdata: UserDataService,
     private router: Router,
     private auth: AuthService,
-    private guard: AuthGuard
+    private guard: AuthGuard,
+    private dialog: MatDialog
   ) {}
 
   loginForm = new FormGroup({
@@ -75,5 +76,13 @@ export class LoginComponent {
 
   register(){
     this.router.navigate(['/register']);
+  }
+
+  recuperar(){
+    this.dialog.open(RecoverComponent, {
+      width: "650px",
+      height: "500px",
+      panelClass: 'recover'
+    })
   }
 }

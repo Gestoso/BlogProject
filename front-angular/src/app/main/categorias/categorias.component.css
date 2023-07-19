@@ -3,6 +3,16 @@
 }
 
 .card {
-  border: 3px solid black ;
+  border: 1px solid black ;
   box-shadow: 2px 2px 4px rgb(199, 199, 199);
 }
+
+.perfil:hover {
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+
+
+}
+
