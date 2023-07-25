@@ -15,7 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    //return new Recover;
-    /* $respuest = Mail::to()->send($email);
-        dump($respuest); */
+
 });
+
+Route::get('/recover/{id}', function ($id) {
+    return redirect('http://localhost:4200/recover?id=' . $id);
+});
+

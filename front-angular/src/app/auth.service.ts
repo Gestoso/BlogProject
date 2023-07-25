@@ -11,6 +11,7 @@ export class AuthService {
   private data: any;
   datauser: any;
   categorias: any;
+  email: any;
 
   setCategorias(value: any) {
     this.categorias = value;
@@ -35,7 +36,11 @@ export class AuthService {
     return this.datauser;
   }
   getemailDatauser() {
-    return this.data.email;
+    return this.email;
+  }
+
+  setemailDatauser(value:any) {
+this.email= value;
   }
 
   getTokenuser(){

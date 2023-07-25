@@ -1,0 +1,8 @@
+<h2>Cambio de contraseña:</h2>
+
+<form class="form-group" [formGroup]="recoverForm" (ngSubmit)="onSubmit()">
+  <h2>Introduce la nueva contraseña para su cuenta:</h2>
+  <input type="text" formControlName="password" id="password" placeholder="Password">
+<br>
+  <button class="m-1" type="submit">Enviar</button>
+</form>

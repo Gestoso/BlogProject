@@ -12,13 +12,15 @@ use Illuminate\Queue\SerializesModels;
 class Recover extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $user;
+    public $code;
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($user, $code)
     {
-        //
+        $this->user = $user;
+        $this->code = $code;
     }
 
     /**
@@ -37,7 +39,7 @@ class Recover extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'welcome ',
+            view: 'welcome'
         );
     }
 

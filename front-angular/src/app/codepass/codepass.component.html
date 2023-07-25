@@ -1,0 +1,8 @@
+<h1>Introduce el codigo que se te ha enviado desde el correo de recuperacion:</h1>
+
+<form class="form-group" [formGroup]="codepassword" (ngSubmit)="onSubmit()">
+  <h2>Introduce tu direccion de correo vinculada a tu cuenta:</h2>
+  <input type="text" formControlName="codepass" id="codepassword" placeholder="Codigo">
+<br>
+  <button class="m-1" type="submit">Enviar</button>
+</form>

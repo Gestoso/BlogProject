@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-recover',
@@ -10,18 +11,18 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class RecoverComponent {
   email: any;
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    public dialogRef: MatDialogRef<RecoverComponent>
   ) {
 
   }
 
   recoverForm = new FormGroup ({
     email: new FormControl ('',[Validators.required, Validators.email])
-  })
+  });
 
   onSubmit() {
      this.email = this.recoverForm.controls['email'].value;
-    console.log(this.email);
 
     this.http.post('http://127.0.0.1:8000/api/recover', { email: this.email })
     .subscribe(
@@ -31,8 +32,7 @@ export class RecoverComponent {
       (error) => {
         console.error('Error en la solicitud:', error);
       }
-    );
-    console.log("fet");
+    );this.dialogRef.close();
 
   }
 

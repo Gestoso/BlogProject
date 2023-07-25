@@ -11,6 +11,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Throwable;
 
 class UserController extends Controller
@@ -101,14 +102,38 @@ class UserController extends Controller
 
     public function recover(Request $request) {
         $email = $request->input('email');
+        $user = User::where('email', $email)->first();
+    $code = Str::random(20);
+    $user->codepass = $code;
+    $user->save();
+    Mail::to($email)->send(new Recover($user, $code));
 
-    $response = Mail::to($email)->send(new Recover);
-
-    if ($response === 0) {
-        return response()->json(['message' => 'El correo se envió exitosamente']);
-    } else {
-        return response()->json(['message' => 'Hubo un error al enviar el correo']);
+    return response()->json([
+        'user' => $user,
+        'code' => $code
+    ]);
     }
+
+    public function getuser($id){
+        $user = User::where('id', $id)->first();
+        if (!$user) {
+            return response()->json(['error' => 'El usuario no existe'], 404);
+        }else{
+            return response()->json($user);
+        }
+    }
+
+    public function getcode ($id){
+        $user = User::where('id', $id)->first();
+        $code = $user->codepass;
+        return response()->json($code);
+    }
+
+    public function changepass(Request $request) {
+        $user = User::where('id', $request->id)->first();
+
+        $user->password = Hash::make($request->password);
+        $user->save();
     }
 
     public function logout(Request $request){

@@ -6,10 +6,18 @@
 
         <title>Laravel</title>
 </head>
+<php>
+</php>
     <body>
     <h1>
-        Hello World! This is my first laravel project.
-        I hope you like it and learn something new with me :D
+        Solicitud para cambiar la contraseña
 </h1>
+Hola {{ $user->name }}, se ha solicitado un restablecimiento de su
+contraseña. <br> Para continuar con el proceso haga click en el siguiente link e introduzca el siguiente código:
+<h2>
+    {{$code}}
+</h2>
+<a href="{{ url('/recover/' . $user->id) }}">Restablecer contraseña</a>.
+<br>
     </body>
 </html>

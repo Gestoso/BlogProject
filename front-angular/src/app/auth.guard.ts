@@ -58,6 +58,9 @@ export class AuthGuard implements CanActivate {
     console.log(this.jsonData);
 
     this.auth.setDatauser(this.jsonData.user);
+    this.auth.setemailDatauser(this.jsonData.user.email)
+    console.log(this.jsonData.user.email);
+
     if (this.jsonData.blog != null) {
           this.auth.setDataBlog(this.jsonData.blog);
 

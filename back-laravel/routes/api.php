@@ -35,5 +35,8 @@ Route::post('/continueblog', [BlogController::class, 'continueblog']);
 Route::post('/deleteblog', [BlogController::class, 'deleteblog']);
 Route::get('/getblogs', [BlogController::class, 'getblogs']);
 Route::post('/recover', [UserController::class, 'recover']);
+Route::get('/getcode/{id}', [UserController::class, 'getcode']);
+Route::get('/getuser/{id}', [UserController::class, 'getuser']);
+Route::post('/changepass', [UserController::class, 'changepass']);
 Route::get('/ususeleccionado', [UserController::class, 'ususeleccionado']);
 

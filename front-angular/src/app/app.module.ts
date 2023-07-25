@@ -27,6 +27,8 @@ import { DatePipe } from '@angular/common';
 import { UsuarioComponent } from './main/usuario/usuario.component';
 import { LoadingPageComponent } from './loading-page/loading-page.component';
 import { RecoverComponent } from './recover/recover.component';
+import { NewpassComponent } from './newpass/newpass.component';
+import { CodepassComponent } from './codepass/codepass.component';
 
 
 
@@ -45,7 +47,9 @@ import { RecoverComponent } from './recover/recover.component';
     CategoriasComponent,
     UsuarioComponent,
     LoadingPageComponent,
-    RecoverComponent
+    RecoverComponent,
+    NewpassComponent,
+    CodepassComponent
   ],
   imports: [
     BrowserModule,
