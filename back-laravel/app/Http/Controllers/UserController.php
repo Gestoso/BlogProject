@@ -123,10 +123,14 @@ class UserController extends Controller
         }
     }
 
-    public function getcode ($id){
-        $user = User::where('id', $id)->first();
+    public function getcode (Request $request){
+        $user = User::where('id', $request->id)->first();
         $code = $user->codepass;
-        return response()->json($code);
+        if ($code == $request->code){
+            return response()->json($code);
+        }
+        return response()->json('Codigo incorrecto');
+
     }
 
     public function changepass(Request $request) {

@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CodepassComponent } from '../codepass/codepass.component';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-newpass',
   templateUrl: './newpass.component.html',
@@ -13,6 +13,7 @@ import { CodepassComponent } from '../codepass/codepass.component';
 export class NewpassComponent implements OnInit{
   id: any;
   user: any;
+  loading = false;
   constructor(
     private router : Router,
     private http: HttpClient,
@@ -37,7 +38,7 @@ setTimeout(() => {
     );
 }, 1000);
 
-
+  this.loading = true;
   }
   recoverForm = new FormGroup({
     password: new FormControl ('',  [Validators.required])
@@ -50,11 +51,21 @@ setTimeout(() => {
 
     let data = {
       id: id,
-      password: password
+      password: password,
+
     }
 
     this.http.post('http://127.0.0.1:8000/api/changepass', data).subscribe((response)=>
     response
     );
+    Swal.fire({
+      icon: 'success',
+      title: 'La contraseña se ha cambiado correctamente!'
+    });
+    setTimeout(() => {
+      this.router.navigate(['/login']);
+    this.loading = true;
+    }, 1000);
+
   }
 }
