@@ -1,12 +1,10 @@
-
-
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+:root {
+  --neon-blue: #00e5ff;
+  --neon-blue-light: #00f3ff;
+  --neon-blue-dark: #00b2ff;
+  --neon-blue-glow: #80cfff;
+  --neon-blue-text: #ffffff;
 }
-
-
 button {
   margin: 2px;
 }
@@ -14,11 +12,33 @@ button {
 .details {
   display: flex;
   justify-content: center;
-  align-items: center;}
+  align-items: center;
+
+}
+
+h1, h2, p {
+  color: #00e5ff;
+}
 
 .child {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  border-radius: 5px;
+  border: 2px solid #80cfff;
+  transition: all 0.5s ease-in-out;
+}
+
+.child:hover {
+  transform: translate(-50%, -50%) scale(1.4);
+  box-shadow: 0 0 20px #80cfff, 0 0 40px #80cfff, 0 0 60px #80cfff;
+}
+
+
+
+:host { background-color: #21282a; display: block; height: 100%; }
+
+.card {
+  background-color: #21282a;
 }

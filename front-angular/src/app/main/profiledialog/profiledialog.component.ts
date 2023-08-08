@@ -17,9 +17,13 @@ export class ProfiledialogComponent implements OnInit {
     private http: HttpClient
   )
    {
+
+
    }
 
   ngOnInit(): void {
+    this.usuario = this.auth.getDatauser()
+    console.log(this.usuario);
   }
 
   guardarusu = new FormGroup({

@@ -3,15 +3,15 @@
   <form [formGroup]="guardarusu" (submit)="guardar()">
     <div class="form-group">
       <label for="name">Nombre</label>
-      <input type="text" formControlName="name" class="form-control" id="name" [(ngModel)]="usuario.usuario.name" name="name">
+      <input type="text" formControlName="name" class="form-control" id="name" [(ngModel)]="usuario.name" name="name">
     </div>
     <div class="form-group">
       <label for="email">Email</label>
-      <input type="email" formControlName="email" class="form-control" id="email" [(ngModel)]="usuario.usuario.email" name="email">
+      <input type="email" formControlName="email" class="form-control" id="email" [(ngModel)]="usuario.email" name="email">
     </div>
     <div class="form-group">
       <label for="img">Imagen de Perfil</label>
-      <input type="img" formControlName="img" class="form-control" id="img" [(ngModel)]="usuario.usuario.img" name="img">
+      <input type="img" formControlName="img" class="form-control" id="img" [(ngModel)]="usuario.img" name="img">
     </div>
     <div class="form-group">
       <label for="password">Contraseña</label>
@@ -21,7 +21,7 @@
       <label for="password">Repetir contraseña</label>
       <input type="password" formControlName="conf_password" class="form-control" id="conf_password" name="conf_password">
     </div>
-    <button type="submit" mat-dialog-close class="btn btn-primary">Guardar</button>
-
-  </form><button type="submit" class="btn btn-danger" mat-dialog-close>Cancelar</button>
+    <button type="submit" mat-dialog-close class="btn btn-primary neon">Guardar</button>
+<button type="submit" class="btn btn-danger neon" mat-dialog-close>Cancelar</button>
+  </form>
 </div>

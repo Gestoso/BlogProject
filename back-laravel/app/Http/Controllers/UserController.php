@@ -156,7 +156,7 @@ class UserController extends Controller
     }
 
     public function editarusu(Request $request) {
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('id', $request->id)->first();
 
         $user->name = $request->filled('name') ? $request->name : $user->name;
         $user->email = $request->filled('email') ? $request->email : $user->email;

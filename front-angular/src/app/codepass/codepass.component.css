@@ -1,0 +1,27 @@
+:root {
+  --neon-blue: #00e5ff;
+  --neon-blue-light: #00f3ff;
+  --neon-blue-dark: #00b2ff;
+  --neon-blue-glow: #80cfff;
+  --neon-blue-text: #ffffff;
+}
+:host { background-color: #21282a; display: block; height: 100%; }
+h2, label, h3, h1 {
+  color: #00e5ff;
+}
+h1, form {
+  display: flex;
+  justify-content: center;
+}
+
+.neon {
+    background-color: var(--neon-blue-light);
+    color: #00b2ff;
+    margin: 1%;
+  }
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

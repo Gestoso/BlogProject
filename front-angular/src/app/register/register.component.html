@@ -1,21 +1,20 @@
 <div class="container">
-  <h2>Registro de Usuario</h2>
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <h1>Registro de Usuario</h1>
+  <form class="form-group" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="name">Nombre:</label>
       <input type="text" formControlName="name" class="form-control" id="name" placeholder="Ingrese su nombre">
     </div>
     <div class="form-group">
-      <label for="email">Correo electrónico:</label>
       <input type="email" formControlName="email" class="form-control" id="email" placeholder="Ingrese su correo electrónico">
     </div>
     <div class="form-group">
-      <label for="password">Contraseña:</label>
       <input type="password" formControlName="password" class="form-control" id="password" placeholder="Ingrese su contraseña">
     </div>
-    <button type="submit" class="btn btn-primary">Registrarse</button>
+    <button type="submit" class="btn btn-primary neon">Registrarse</button>
   </form>
   <br>
-  <h3>Ya tienes una cuenta?</h3>
-  <button (click)="login()" class="btn btn-primary">Inicia sesión aqui</button>
+  <h3 class="centro">Ya tienes una cuenta?</h3>
+  <div class="centro">
+<button (click)="login()" class="btn btn-primary neon">Inicia sesión aqui</button>
+  </div>
 </div>

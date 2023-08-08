@@ -1,26 +1,23 @@
 <app-loading-page *ngIf="!loading"></app-loading-page>
 <div *ngIf="loading">
-<button class="btn btn-primary return"   (click)="return()">Volver</button>
-<div class="container dialog-centered profile">
+  <app-navbar></app-navbar>
+<div class="container dialog-centered">
   <div class="row">
-    <div class="col-md-4">
-      <!-- Avatar del usuario -->
+    <div class="col-md-4 marg">
       <div class="avatar-container">
         <img src="{{usuario.img}}" alt="Avatar del usuario" class="avatar-img">
       </div>
     </div>
-    <div class="col-md-8">
-      <!-- Información del usuario -->
+    <div class="col-md-8 marg">
       <h1>{{usuario.name}}</h1>
       <p>Correo electrónico: {{usuario.email}}</p>
       <p>Contraseña: *********</p>
-      <mat-dialog-actions>
-        <button class="btn btn-primary"   (click)="openDialog()">Editar Perfil</button>
-      </mat-dialog-actions>
-      <button class="btn btn-danger">Eliminar Cuenta</button>
+        <button class="btn btn-primary neon" (click)="openDialog()">Editar Perfil</button>
+      <button class="btn btn-danger neon">Eliminar Cuenta</button>
     </div>
   </div>
 </div>
+<app-footer></app-footer>
 </div>
 
 

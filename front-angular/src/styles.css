@@ -1,7 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;  color: #21282a !important;
+  background-color: #21282a !important; }
 
 .mat-dialog-container.dialog-centered {
   display: flex !important;
@@ -11,4 +12,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .mat-mdc-dialog-container {
   --mdc-dialog-container-color: #ffffff;
+}
+app-navbar {
+  z-index: 1;
+}
+app-footer {
+  z-index: 1;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  background-color: #21282a !important;
 }

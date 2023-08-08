@@ -1,19 +1,15 @@
 <app-loading-page *ngIf="!loading"></app-loading-page>
-<div class="wrapper" *ngIf="loading">
+<div *ngIf="loading">
 <app-navbar></app-navbar>
-<div class="details">
 <div class="card text-center child">
   <h1 class="card-header">Detalles de tu Blog</h1>
   <div class="card-body">
     <h2 class="card-title">Nombre: {{ blog.title }}</h2>
-    <ul class="list-group list-group-flush">
-    <li class="list-group-item"></li>
-    <li class="list-group-item">Categoria: {{ blog.categoria }}</li>
-    <li class="list-group-item">Dia creado: {{ diac }}</li>
-    <li class="list-group-item"> Última actualización: {{ diau }} a las {{horau}}</li>
-    </ul>
+    <p class="card-text">Categoria: {{ blog.categoria }}</p>
+    <p class="card-text">Dia creado: {{ diac }}</p>
+    <p class="card-text"> Última actualización: {{ diau }} a las {{horau}}</p>
   </div>
 </div>
-</div>
+
 <app-footer></app-footer>
 </div>

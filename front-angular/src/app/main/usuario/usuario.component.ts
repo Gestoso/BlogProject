@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-usuario',
@@ -12,7 +13,7 @@ export class UsuarioComponent implements OnInit{
   usuario: any
 
   constructor(
-    private router : Router,
+    private location: Location,
     private http: HttpClient,
     private route: ActivatedRoute,
   ){
@@ -29,5 +30,7 @@ export class UsuarioComponent implements OnInit{
       });
     });
   }
-
+  return(){
+    this.location.back();
+  }
 }

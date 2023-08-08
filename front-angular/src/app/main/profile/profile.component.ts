@@ -34,8 +34,9 @@ export class ProfileComponent {
   openDialog(){
 
     this.dialog.open(ProfiledialogComponent, {
-      width: '650px',
-      height: '400px',
+      width: '30%',
+      height: '70%',
+
     } )
   }
   return(){

@@ -30,7 +30,6 @@ export class CategoriasComponent  implements OnInit, AfterContentInit{
   }
 
   ngAfterContentInit(): void {
-    setTimeout(() => {
       console.log(this.categoria.name);
       this.http.get('http://127.0.0.1:8000/api/getblogs', { params: { categoria: this.categoria.name } }).subscribe(response => {
         console.log(response);
@@ -42,6 +41,8 @@ export class CategoriasComponent  implements OnInit, AfterContentInit{
       blog.updated_at = formattedDate;
     }
     });
+    setTimeout(() => {
+
     this.loading = true;
     }, 1000);
   }
@@ -59,5 +60,7 @@ console.log(id);
 this.router.navigate(['/main/usuario/'+id], {queryParams: {id}});
 return id;
   }
+
+
 
 }

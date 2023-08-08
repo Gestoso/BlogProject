@@ -80,9 +80,8 @@ export class LoginComponent {
 
   recuperar(){
     this.dialog.open(RecoverComponent, {
-      width: "650px",
-      height: "500px",
-      panelClass: 'recover'
+      width: "50%",
+      height: "20%"
     })
   }
 }

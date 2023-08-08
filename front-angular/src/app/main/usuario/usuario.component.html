@@ -1,12 +1,11 @@
 <div class="wrapper">
   <app-navbar></app-navbar>
-  <div class="details">
+  <button class="btn btn-primary neon margin-btn" (click)="return()">Volver</button>
+  <div class="container">
   <div class="card text-center child">
-    <h1 class="card-header">Detalles de {{ usuario.name }}</h1>
+    <h1 class="card-header">Detalles de: {{ usuario.name }}</h1>
     <div class="card-body">
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Email: {{ usuario.email }}</li>
-        </ul>
+        <p class="list-group-item">Email: {{ usuario.email }}</p>
     </div>
   </div>
   </div>

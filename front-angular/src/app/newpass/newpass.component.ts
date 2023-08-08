@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Host, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CodepassComponent } from '../codepass/codepass.component';
 import Swal from 'sweetalert2';
+/* import 'sweetalert2/dist/sweetalert2.css'; */
 @Component({
   selector: 'app-newpass',
   templateUrl: './newpass.component.html',
@@ -24,8 +25,8 @@ export class NewpassComponent implements OnInit{
   }
   ngOnInit(): void {
     this.dialog.open(CodepassComponent, {
-      width:'500px',
-      height:"500px",
+      width:'60%',
+      height:"20%",
       disableClose: true
     });
     this.route.queryParams.subscribe(params => {
@@ -60,7 +61,8 @@ setTimeout(() => {
     );
     Swal.fire({
       icon: 'success',
-      title: 'La contraseña se ha cambiado correctamente!'
+      title: 'La contraseña se ha cambiado correctamente!',
+      customClass: 'container'
     });
     setTimeout(() => {
       this.router.navigate(['/login']);
